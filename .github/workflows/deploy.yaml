@@ -32,7 +32,7 @@ jobs:
 
           # Ganti ke multi-project sesuai nama folder kamu
           if [ ! -d "multi-project" ]; then
-            git clone https://github.com/DioSptra/GITHUBxDOCKER.git multi-project
+            git clone https://github.com/DioSptra/multi-project.git multi-project
           fi
 
           cd multi-project || exit 1
