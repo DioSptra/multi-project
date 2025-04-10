@@ -18,6 +18,9 @@ jobs:
         DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER_IP }}
         DEPLOY_USER: ${{ secrets.DEPLOY_USER_UBUNTU }}
         SSH_KEY: ${{ secrets.SSH_KEY_UBUNTU }}
+        APP-1: contact-book
+        APP-2: habit-tracker
+        APP-3: mini-gojek
       run: |
         mkdir -p ~/.ssh
         ssh-keyscan -t rsa $DEPLOY_SERVER >> ~/.ssh/known_hosts
@@ -43,25 +46,25 @@ jobs:
 
           # ============ MINI GOJEK (Python) ============
           cd mini_gojek
-          docker stop mini-gojek || true
-          docker rm mini-gojek || true
-          docker build -t mini-gojek .
-          docker run -d --restart always --name mini-gojek -p 5000:5000 mini-gojek
+          sudo docker stop mini-gojek || true
+          sudo docker rm mini-gojek || true
+          sudo docker build -t mini-gojek .
+          sudo docker run -d --restart always --name mini-gojek -p 5000:5000 mini-gojek
           cd ..
 
           # ============ HABIT TRACKER (Node.js) ============
           cd habit-tracker
-          docker stop habit-tracker || true
-          docker rm habit-tracker || true
-          docker build -t habit-tracker .
-          docker run -d --restart always --name habit-tracker -p 3000:3000 habit-tracker
+          sudo docker stop habit-tracker || true
+          sudo docker rm habit-tracker || true
+          sudo docker build -t habit-tracker .
+          sudo docker run -d --restart always --name habit-tracker -p 3000:3000 habit-tracker
           cd ..
 
           # ============ CONTACT BOOK (PHP) ============
           cd contact-book
-          docker stop contact-book || true
-          docker rm contact-book || true
-          docker build -t contact-book .
-          docker run -d --restart always --name contact-book -p 8080:80 contact-book
+          sudo docker stop contact-book || true
+          sudo docker rm contact-book || true
+          sudo docker build -t contact-book .
+          sudo docker run -d --restart always --name contact-book -p 8080:80 contact-book
           cd ..
         EOF
