@@ -1,4 +1,4 @@
-name: CI/CD DockerxGithub
+name: CI/CD multi-project
 
 on:
   push:
@@ -18,9 +18,7 @@ jobs:
         DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER_IP }}
         DEPLOY_USER: ${{ secrets.DEPLOY_USER_UBUNTU }}
         SSH_KEY: ${{ secrets.SSH_KEY_UBUNTU }}
-        APP-1: contact-book
-        APP-2: habit-tracker
-        APP-3: mini-gojek
+        
       run: |
         mkdir -p ~/.ssh
         ssh-keyscan -t rsa $DEPLOY_SERVER >> ~/.ssh/known_hosts
