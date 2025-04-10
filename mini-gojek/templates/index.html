@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Gojek</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">🛵 Mini Gojek Web</h1>
+        <p>Pilih layanan yang kamu butuhkan:</p>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">GoRide</h5>
+                        <p class="card-text">Pesan motor online.</p>
+                        <a href="#" class="btn btn-success">Pesan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">GoCar</h5>
+                        <p class="card-text">Pesan mobil online.</p>
+                        <a href="#" class="btn btn-primary">Pesan</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mt-3 mt-md-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">GoFood</h5>
+                        <p class="card-text">Pesan makanan favoritmu.</p>
+                        <a href="#" class="btn btn-danger">Pesan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-5 text-muted">© 2025 Mini Gojek Web</p>
+    </div>
+</body>
+</html>

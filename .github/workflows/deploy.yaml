@@ -1,0 +1,67 @@
+name: CI/CD DockerxGithub
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Deploy 3 Apps to Server via SSH
+      env:
+        DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER_IP }}
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER_UBUNTU }}
+        SSH_KEY: ${{ secrets.SSH_KEY_UBUNTU }}
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan -t rsa $DEPLOY_SERVER >> ~/.ssh/known_hosts
+        echo "$SSH_KEY" | tr -d '\r' > temp_key
+        chmod 600 temp_key
+
+        ssh -i temp_key $DEPLOY_USER@$DEPLOY_SERVER << 'EOF'
+          cd ~
+
+          # Ganti ke multi-project sesuai nama folder kamu
+          if [ ! -d "multi-project" ]; then
+            git clone https://github.com/DioSptra/GITHUBxDOCKER.git multi-project
+          fi
+
+          cd multi-project || exit 1
+          git pull origin master
+
+          # Install Docker if not installed
+          if ! command -v docker &> /dev/null; then
+            echo "Docker not found, installing..."
+            bash install-docker.sh
+          fi
+
+          # ============ MINI GOJEK (Python) ============
+          cd mini_gojek
+          docker stop mini-gojek || true
+          docker rm mini-gojek || true
+          docker build -t mini-gojek .
+          docker run -d --restart always --name mini-gojek -p 5000:5000 mini-gojek
+          cd ..
+
+          # ============ HABIT TRACKER (Node.js) ============
+          cd habit-tracker
+          docker stop habit-tracker || true
+          docker rm habit-tracker || true
+          docker build -t habit-tracker .
+          docker run -d --restart always --name habit-tracker -p 3000:3000 habit-tracker
+          cd ..
+
+          # ============ CONTACT BOOK (PHP) ============
+          cd contact-book
+          docker stop contact-book || true
+          docker rm contact-book || true
+          docker build -t contact-book .
+          docker run -d --restart always --name contact-book -p 8080:80 contact-book
+          cd ..
+        EOF
