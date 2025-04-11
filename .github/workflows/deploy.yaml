@@ -58,7 +58,7 @@ jobs:
           sudo docker run -d --restart always --name habit-tracker -p 3000:3000 habit-tracker
           cd ..
 
-          # ============ CONTACT BOOK (PHP) ============
+          # ============  CONTACT BOOK (PHP) ============
           cd contact-book { echo "contact-book folder not found"; exit 1; }
           sudo docker stop contact-book || true
           sudo docker rm contact-book || true
