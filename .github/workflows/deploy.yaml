@@ -59,7 +59,7 @@ jobs:
           cd ..
 
           # ============  CONTACT BOOK (PHP) ============
-          cd contact-book { echo "contact-book folder not found"; exit 1; }
+          cd contact-book || { echo "contact-book folder not found"; exit 1; }
           sudo docker stop contact-book || true
           sudo docker rm contact-book || true
           sudo docker build -t contact-book .
