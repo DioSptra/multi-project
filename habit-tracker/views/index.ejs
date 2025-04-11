@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Habit Tracker</title>
+  <title>✅ Habit Tracker</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🌱 Habit Tracker</h1>
-    <form action="/add" method="POST">
-      <input type="text" name="habit" placeholder="Tambah kebiasaan baru..." required>
+    <h1>My Daily Habits</h1>
+
+    <form method="POST" action="/add">
+      <input type="text" name="habit" placeholder="Masukkan kebiasaan baru..." required>
       <button type="submit">Tambah</button>
     </form>
 
     <ul>
-      <% habits.forEach((habit, i) => { %>
+      <% habits.forEach((habit, index) => { %>
         <li class="<%= habit.done ? 'done' : '' %>">
-          <form action="/check" method="POST" style="display:inline;">
-            <input type="hidden" name="index" value="<%= i %>">
-            <button type="submit"><%= habit.done ? '✅' : '⬜️' %></button>
-          </form>
           <span><%= habit.name %></span>
+          <form method="POST" action="/check" style="display:inline;">
+            <input type="hidden" name="index" value="<%= index %>">
+            <button type="submit"><%= habit.done ? "✅" : "☑️" %></button>
+          </form>
         </li>
       <% }) %>
     </ul>
