@@ -43,7 +43,7 @@ jobs:
           fi
 
           # ============ MINI GOJEK (Python) ============
-          cd mini_gojek
+          cd mini-gojek
           sudo docker stop mini-gojek || true
           sudo docker rm mini-gojek || true
           sudo docker build -t mini-gojek .
