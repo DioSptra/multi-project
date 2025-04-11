@@ -51,7 +51,7 @@ jobs:
           cd ..
 
           # ============ HABIT TRACKER (Node.js) ============
-          cd habit-tracker
+          cd habit-tracker || { echo "habit-tracker folder not found"; exit 1; }
           sudo docker stop habit-tracker || true
           sudo docker rm habit-tracker || true
           sudo docker build -t habit-tracker .
@@ -59,7 +59,7 @@ jobs:
           cd ..
 
           # ============ CONTACT BOOK (PHP) ============
-          cd contact-book
+          cd contact-book { echo "contact-book folder not found"; exit 1; }
           sudo docker stop contact-book || true
           sudo docker rm contact-book || true
           sudo docker build -t contact-book .
